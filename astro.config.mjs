@@ -1,9 +1,14 @@
-// @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
+import react from "@astrojs/react";
+import tailwind from "@astrojs/tailwind";
 
-import react from '@astrojs/react';
-
-// https://astro.build/config
 export default defineConfig({
-  integrations: [react()]
+  integrations: [react(), tailwind()],
+  i18n: {
+    defaultLocale: "hu",
+    locales: ["hu", "en"],
+    routing: {
+      prefixDefaultLocale: false, // A magyar URL-ek nem kapnak /hu/ előtagot
+    },
+  },
 });

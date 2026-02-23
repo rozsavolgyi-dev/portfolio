@@ -1,0 +1,50 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+// We bring in getCollection and Astro 5's new render() function
+import { getCollection, render } from "astro:content";
+
+// 1. Tell Astro which URLs (slugs) should be generated
+export async function getStaticPaths() {
+  // Fetch English projects
+  const projects = await getCollection("projects", (entry) =>
+    entry.id.startsWith("en/"),
+  );
+
+  // Generate a route for each project
+  return projects.map((project) => ({
+    // The slug will be the filename (e.g., 'first-project')
+    params: { slug: project.id.replace("en/", "") },
+    // Pass the specific project data to the HTML page
+    props: { project },
+  }));
+}
+
+// 2. Extract the data passed by the function above
+const { project } = Astro.props;
+// 3. Convert the Markdown text into React/HTML components with the render() function
+const { Content } = await render(project);
+---
+
+<Layout title={project.data.title} description={project.data.description}>
+  <article class="max-w-3xl mx-auto px-4 py-20">
+    <div class="mb-10 text-center">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">
+        {project.data.title}
+      </h1>
+      <div class="flex justify-center gap-2 mb-6">
+        {
+          project.data.tags.map((tag) => (
+            <span class="px-3 py-1 bg-blue-50 text-blue-700 text-sm font-medium rounded-full">
+              {tag}
+            </span>
+          ))
+        }
+      </div>
+      <p class="text-lg text-gray-600">{project.data.description}</p>
+    </div>
+
+    <div class="prose prose-lg prose-blue mx-auto">
+      <Content />
+    </div>
+  </article>
+</Layout>

@@ -1,0 +1,38 @@
+.
+├── astro.config.mjs
+├── gemini.txt
+├── package.json
+├── package-lock.json
+├── public
+│   ├── favicon.ico
+│   └── favicon.svg
+├── README.md
+├── src
+│   ├── assets
+│   │   ├── astro.svg
+│   │   └── background.svg
+│   ├── components
+│   │   ├── Header.tsx
+│   │   └── ProjectCard.tsx
+│   ├── content
+│   │   ├── config.ts
+│   │   └── projects
+│   │       ├── en
+│   │       │   └── first-project.md
+│   │       ├── hu
+│   │       │   └── first-project.md
+│   │       └── [slug].astro
+│   ├── i18n
+│   │   ├── ui.ts
+│   │   └── utils.ts
+│   ├── layouts
+│   │   └── Layout.astro
+│   ├── pages
+│   │   ├── en
+│   │   │   └── index.astro
+│   │   └── index.astro
+│   └── styles
+│       └── global.css
+└── tsconfig.json
+
+13 directories, 22 files

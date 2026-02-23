@@ -1,37 +1,37 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ProjectCard from "../components/ProjectCard";
-// Ezzel a beépített függvénnyel kérjük le a Markdown fájlokat
+import Layout from "../../layouts/Layout.astro";
+import ProjectCard from "../../components/ProjectCard";
+// We fetch Markdown files using this built-in function
 import { getCollection } from "astro:content";
 
-// Lekérjük az összes projektet, és a legújabbtól a legrégebbi felé rendezzük
+// Fetch all projects and sort them from newest to oldest
 const allProjects = await getCollection("projects", (entry) =>
-  entry.id.startsWith("hu/"),
+  entry.id.startsWith("en/"),
 );
 
-// A slug-ból (ami most 'hu/elso-projekt') levágjuk a 'hu/'-t a linkhez
+// We strip the 'en/' prefix from the id (e.g., 'en/first-project') for the link
 const sortedProjects = allProjects.sort(
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
 ---
 
-<Layout title="Kezdőlap">
+<Layout title="Home" description="Rosavallis - Professional Web Development">
   <section class="max-w-6xl mx-auto px-4 py-20 text-center">
     <h1 class="text-5xl font-extrabold tracking-tight mb-6">
-      Modern weboldalak <span class="text-blue-600">React</span> alapokon
+      Modern websites powered by <span class="text-blue-600">React</span>
     </h1>
     <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-      Készül a portfóliónk! Hamarosan láthatod az eddigi legjobb projektjeinket.
+      Our portfolio is under construction! New projects are coming soon.
     </p>
   </section>
 
   <section class="max-w-6xl mx-auto px-4 py-12 mb-20">
     <div class="flex justify-between items-end mb-8">
-      <h2 class="text-3xl font-bold text-gray-900">Legújabb munkáink</h2>
+      <h2 class="text-3xl font-bold text-gray-900">Latest projects</h2>
       <a
-        href="/projects"
+        href="/en/projects"
         class="text-blue-600 font-medium hover:underline hidden sm:block"
-        >Összes megtekintése &rarr;</a
+        >View all &rarr;</a
       >
     </div>
 
@@ -42,7 +42,7 @@ const sortedProjects = allProjects.sort(
             title={project.data.title}
             description={project.data.description}
             tags={project.data.tags}
-            href={`/projects/${project.id.replace("hu/", "")}`}
+            href={`/en/projects/${project.id.replace("en/", "")}`}
           />
         ))
       }

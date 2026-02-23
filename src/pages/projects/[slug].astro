@@ -1,0 +1,50 @@
+---
+import Layout from "../../layouts/Layout.astro";
+// Behozzuk a getCollection-t és az Astro 5 új render() függvényét
+import { getCollection, render } from "astro:content";
+
+// 1. Megmondjuk az Astrónak, milyen URL-eket (slug-okat) kell legenerálnia
+export async function getStaticPaths() {
+  // Lekérjük a magyar projekteket
+  const projects = await getCollection("projects", (entry) =>
+    entry.id.startsWith("hu/"),
+  );
+
+  // Minden projektből generálunk egy útvonalat
+  return projects.map((project) => ({
+    // A slug a fájlnév lesz (pl. 'elso-projekt')
+    params: { slug: project.id.replace("hu/", "") },
+    // Átadjuk a konkrét projekt adatait a HTML oldalnak
+    props: { project },
+  }));
+}
+
+// 2. Kinyerjük az adatokat, amiket a fenti függvény átadott
+const { project } = Astro.props;
+// 3. A render() függvénnyel a Markdown szövegből React/HTML komponenseket csinálunk
+const { Content } = await render(project);
+---
+
+<Layout title={project.data.title}>
+  <article class="max-w-3xl mx-auto px-4 py-20">
+    <div class="mb-10 text-center">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">
+        {project.data.title}
+      </h1>
+      <div class="flex justify-center gap-2 mb-6">
+        {
+          project.data.tags.map((tag) => (
+            <span class="px-3 py-1 bg-blue-50 text-blue-700 text-sm font-medium rounded-full">
+              {tag}
+            </span>
+          ))
+        }
+      </div>
+      <p class="text-lg text-gray-600">{project.data.description}</p>
+    </div>
+
+    <div class="prose prose-lg prose-blue mx-auto">
+      <Content />
+    </div>
+  </article>
+</Layout>
