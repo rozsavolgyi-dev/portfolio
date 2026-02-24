@@ -10,7 +10,7 @@ export default function Header({ lang }: HeaderProps) {
   return (
     <header className="bg-black/40 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-        <a href={lang === 'hu' ? '/' : `/${lang}/`} className="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 tracking-tight">
+        <a href={lang === 'hu' ? '/' : `/${lang}/`} className="text-xl font-display font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 tracking-tight">
           Rosavallis
         </a>
         <nav>

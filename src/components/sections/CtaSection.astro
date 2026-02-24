@@ -14,7 +14,11 @@ const { title, subtitle, ctaText, ctaLink } = Astro.props;
     class="bg-gradient-to-br from-cyan-900/40 to-[#050505] rounded-3xl p-12 text-center text-white relative overflow-hidden border border-white/10"
   >
     <div class="relative z-10">
-      <h2 class="text-3xl md:text-5xl font-bold mb-6">{title}</h2>
+      <h2
+        class="text-4xl md:text-5xl font-display font-bold mb-6 tracking-tight"
+      >
+        {title}
+      </h2>
       <p class="text-zinc-300 text-xl mb-10 max-w-2xl mx-auto">
         {subtitle}
       </p>

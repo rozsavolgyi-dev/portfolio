@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Code2, Globe, Cpu, Cloud } from "lucide-react";
 
 import Hero from "../components/sections/Hero.astro";
 import ValueProposition from "../components/sections/ValueProposition.astro";
@@ -17,9 +16,8 @@ const services = [
       "Skálázhatók, ahogy az üzleted növekszik",
       "Biztonságosak és megbízhatóak",
       "Könnyen használhatók",
-      "Modern, iparági szabvány technológiákkal készülnek",
     ],
-    icon: Code2,
+    visualId: "software" as const,
   },
   {
     title: "Webalkalmazások és platformok",
@@ -29,9 +27,8 @@ const services = [
       "Zökkenőmentes felhasználói élményt nyújtanak",
       "Kifogástalanul működnek minden eszközön",
       "Jól kezelik a valós forgalmat és adatokat",
-      "Naprakész keretrendszerek és bevált gyakorlatok használatával készülnek",
     ],
-    icon: Globe,
+    visualId: "web" as const,
   },
   {
     title: "Rendszertervezés és architektúra",
@@ -41,9 +38,8 @@ const services = [
       "A hosszútávú karbantarthatóságot",
       "A magas teljesítményt",
       "Az adatbiztonságot",
-      "A tiszta és szervezett architektúrát",
     ],
-    icon: Cpu,
+    visualId: "architecture" as const,
   },
   {
     title: "Üzemeltetés és folyamatos támogatás",
@@ -53,9 +49,8 @@ const services = [
       "A biztonságos telepítést és élesítést",
       "Szerverbeállítást",
       "Teljesítményoptimalizálást",
-      "Karbantartást és jövőbeli fejlesztéseket",
     ],
-    icon: Cloud,
+    visualId: "support" as const,
   },
 ];
 

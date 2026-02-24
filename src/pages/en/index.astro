@@ -1,6 +1,5 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { Code2, Globe, Cpu, Cloud } from "lucide-react";
 
 import Hero from "../../components/sections/Hero.astro";
 import ValueProposition from "../../components/sections/ValueProposition.astro";
@@ -19,7 +18,7 @@ const services = [
       "Easy to use",
       "Built with modern, industry-standard technologies",
     ],
-    icon: Code2,
+    visualId: "software" as const,
   },
   {
     title: "Web Applications & Platforms",
@@ -31,7 +30,7 @@ const services = [
       "Handle real-world traffic and data",
       "Are built using up-to-date frameworks and best practices",
     ],
-    icon: Globe,
+    visualId: "web" as const,
   },
   {
     title: "System Design & Architecture",
@@ -43,7 +42,7 @@ const services = [
       "Data security",
       "Clean and organized architecture",
     ],
-    icon: Cpu,
+    visualId: "architecture" as const,
   },
   {
     title: "Deployment & Ongoing Support",
@@ -55,7 +54,7 @@ const services = [
       "Performance optimization",
       "Maintenance and future improvements",
     ],
-    icon: Cloud,
+    visualId: "support" as const,
   },
 ];
 
