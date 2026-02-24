@@ -1,0 +1,41 @@
+---
+import { ProcessTimeline } from "../ProcessTimeline";
+
+interface Step {
+  title: string;
+  description: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  noMiddleLayersTitle: string;
+  noMiddleLayersDesc: string;
+  steps: Step[];
+}
+
+const { title, description, noMiddleLayersTitle, noMiddleLayersDesc, steps } =
+  Astro.props;
+---
+
+<section class="max-w-6xl mx-auto px-4 py-24">
+  <div class="flex flex-col lg:flex-row gap-16">
+    <div class="lg:w-1/3">
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
+        {title}
+      </h2>
+      <p class="text-lg text-slate-600 leading-relaxed mb-8">
+        {description}
+      </p>
+      <div class="p-6 bg-indigo-50 rounded-xl border border-indigo-100">
+        <p class="text-indigo-900 font-semibold mb-2">{noMiddleLayersTitle}</p>
+        <p class="text-indigo-800 text-sm leading-relaxed">
+          {noMiddleLayersDesc}
+        </p>
+      </div>
+    </div>
+    <div class="lg:w-2/3">
+      <ProcessTimeline steps={steps} />
+    </div>
+  </div>
+</section>

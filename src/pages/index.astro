@@ -1,51 +1,143 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ProjectCard from "../components/ProjectCard";
-// Ezzel a beépített függvénnyel kérjük le a Markdown fájlokat
-import { getCollection } from "astro:content";
+import { Code2, Globe, Cpu, Cloud } from "lucide-react";
 
-// Lekérjük az összes projektet, és a legújabbtól a legrégebbi felé rendezzük
-const allProjects = await getCollection("projects", (entry) =>
-  entry.id.startsWith("hu/"),
-);
+import Hero from "../components/sections/Hero.astro";
+import ValueProposition from "../components/sections/ValueProposition.astro";
+import ServicesSection from "../components/sections/ServicesSection.astro";
+import ProcessSection from "../components/sections/ProcessSection.astro";
+import CtaSection from "../components/sections/CtaSection.astro";
 
-// A slug-ból (ami most 'hu/elso-projekt') levágjuk a 'hu/'-t a linkhez
-const sortedProjects = allProjects.sort(
-  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
-);
+const services = [
+  {
+    title: "Egyedi szoftverfejlesztés",
+    description:
+      "Olyan személyre szabott szoftvermegoldásokat tervezünk és építünk, amelyek a te üzletedhez igazodnak — nem pedig fordítva. Legyen szó a semmiből felépített teljes platformról vagy egyedi belső eszközről, olyan rendszereket hozunk létre, amelyek:",
+    features: [
+      "Skálázhatók, ahogy az üzleted növekszik",
+      "Biztonságosak és megbízhatóak",
+      "Könnyen használhatók",
+      "Modern, iparági szabvány technológiákkal készülnek",
+    ],
+    icon: Code2,
+  },
+  {
+    title: "Webalkalmazások és platformok",
+    description:
+      "Gyors, modern webalkalmazásokat építünk, amelyek bárhonnan elérhetőek. Az ügyfélportáloktól a teljes SaaS platformokig olyan megoldásokat szállítunk, amelyek:",
+    features: [
+      "Zökkenőmentes felhasználói élményt nyújtanak",
+      "Kifogástalanul működnek minden eszközön",
+      "Jól kezelik a valós forgalmat és adatokat",
+      "Naprakész keretrendszerek és bevált gyakorlatok használatával készülnek",
+    ],
+    icon: Globe,
+  },
+  {
+    title: "Rendszertervezés és architektúra",
+    description:
+      "A jó szoftver a jó struktúrával kezdődik. Minden rendszert gondosan megtervezünk, hogy biztosítsuk:",
+    features: [
+      "A hosszútávú karbantarthatóságot",
+      "A magas teljesítményt",
+      "Az adatbiztonságot",
+      "A tiszta és szervezett architektúrát",
+    ],
+    icon: Cpu,
+  },
+  {
+    title: "Üzemeltetés és folyamatos támogatás",
+    description:
+      "Nem csak kódot írunk — működő megoldásokat szállítunk. Vállaljuk:",
+    features: [
+      "A biztonságos telepítést és élesítést",
+      "Szerverbeállítást",
+      "Teljesítményoptimalizálást",
+      "Karbantartást és jövőbeli fejlesztéseket",
+    ],
+    icon: Cloud,
+  },
+];
+
+const processSteps = [
+  {
+    title: "1. Felfedezés és tervezés",
+    description:
+      "Megértjük az üzleti céljaidat és a technikai követelményeket.",
+  },
+  {
+    title: "2. Architektúra és dizájn",
+    description:
+      "Kódolás előtt megtervezzük a skálázható és fenntartható rendszert.",
+  },
+  {
+    title: "3. Fejlesztés",
+    description:
+      "Tiszta, strukturált implementáció, folyamatos visszajelzéssel.",
+  },
+  {
+    title: "4. Tesztelés és élesítés",
+    description:
+      "Gondoskodunk a stabilitásról és a teljesítményről az indulás előtt.",
+  },
+  {
+    title: "5. Hosszútávú támogatás",
+    description:
+      "Rendelkezésre állunk a jövőbeli fejlesztések és karbantartás során.",
+  },
+];
+
+const differences = [
+  "Éles, produkciós szintű tapasztalat (nem hobbi projektek)",
+  "Tiszta, karbantartható, skálázható kód",
+  "Üzletközpontú gondolkodásmód",
+  "Közvetlen kommunikáció a mérnökökkel (nincsenek közvetítő rétegek)",
+  "Hosszútávon fenntartható megoldások",
+];
 ---
 
-<Layout title="Kezdőlap">
-  <section class="max-w-6xl mx-auto px-4 py-20 text-center">
-    <h1 class="text-5xl font-extrabold tracking-tight mb-6">
-      Modern weboldalak <span class="text-blue-600">React</span> alapokon
-    </h1>
-    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-      Készül a portfóliónk! Hamarosan láthatod az eddigi legjobb projektjeinket.
-    </p>
-  </section>
+<Layout
+  title="Megbízható és skálázható szoftverek"
+  description="Rosavallis - Magas minőségű webes, mobil és backend megoldásokat szállítunk startupok, KKV-k és növekvő vállalkozások számára."
+>
+  <Hero
+    badgeText="Senior Fejlesztő Ügynökség"
+    subtitle="Három főállású szoftvermérnökből álló csapat vagyunk, akik magas minőségű webes, mobil és backend megoldásokat szállítanak startupok, KKV-k és növekvő vállalkozások számára."
+    ctaText="Dolgozzunk együtt"
+    ctaLink="mailto:hello@rosavallis.com"
+  >
+    <Fragment slot="title">
+      Megbízható és <span class="text-indigo-600">skálázható</span> szoftvereket építünk,
+      amelyek az üzleti növekedést szolgálják.
+    </Fragment>
+  </Hero>
 
-  <section class="max-w-6xl mx-auto px-4 py-12 mb-20">
-    <div class="flex justify-between items-end mb-8">
-      <h2 class="text-3xl font-bold text-gray-900">Legújabb munkáink</h2>
-      <a
-        href="/projects"
-        class="text-blue-600 font-medium hover:underline hidden sm:block"
-        >Összes megtekintése &rarr;</a
-      >
-    </div>
+  <ValueProposition
+    whoWeAreTitle="Kik vagyunk"
+    whoWeAreText1="Három tapasztalt szoftverfejlesztőből álló csapat vagyunk, akik főállásban dolgoznak a technológiai szektorban. Miután éveken át építettünk éles rendszereket, skálázható alkalmazásokat és valós üzleti megoldásokat, azért alapítottuk meg a cégünket, hogy segítsünk a vállalkozásoknak ötleteiket robusztus szoftvertermékekké alakítani."
+    whoWeAreText2="Az erős mérnöki elveket gyakorlati üzleti megértéssel ötvözzük — mert egy szoftvernek nem csupán működnie kell, hanem értéket kell teremtenie."
+    differencesTitle="Miben vagyunk mások"
+    differences={differences}
+  />
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {
-        sortedProjects.map((project: any) => (
-          <ProjectCard
-            title={project.data.title}
-            description={project.data.description}
-            tags={project.data.tags}
-            href={`/projects/${project.id.replace("hu/", "")}`}
-          />
-        ))
-      }
-    </div>
-  </section>
+  <ServicesSection
+    title="Szolgáltatásaink"
+    subtitle="Teljes körű mérnöki kiválóságot biztosítunk, a kezdeti architektúra tervezéstől az élesítésig."
+    services={services}
+  />
+
+  <ProcessSection
+    title="Hogyan dolgozunk"
+    description="A munkafolyamatunk úgy van kialakítva, hogy biztosítsa az átláthatóságot, a minőséget és a projektek hosszútávú sikerét. Minden szakaszban a legjobb iparági gyakorlatokat követjük."
+    noMiddleLayersTitle="Nincsenek közvetítő rétegek."
+    noMiddleLayersDesc="Közvetlenül azokkal a mérnökökkel fogsz kommunikálni, akik a szoftveredet építik."
+    steps={processSteps}
+  />
+
+  <CtaSection
+    title="Készen állsz valami robusztus megépítésére?"
+    subtitle="Tedd meg az első lépést egy skálázható szoftvermegoldás felé még ma! Kérj ingyenes konzultációt."
+    ctaText="Dolgozzunk együtt"
+    ctaLink="mailto:hello@rosavallis.com"
+  />
 </Layout>

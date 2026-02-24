@@ -1,0 +1,43 @@
+---
+import { ServiceCard } from "../ServiceCard";
+
+interface Service {
+  title: string;
+  description: string;
+  features: string[];
+  icon: any;
+}
+
+interface Props {
+  title: string;
+  subtitle: string;
+  services: Service[];
+}
+
+const { title, subtitle, services } = Astro.props;
+---
+
+<section class="bg-slate-50 border-y border-gray-100">
+  <div class="max-w-6xl mx-auto px-4 py-24">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+        {title}
+      </h2>
+      <p class="text-slate-600 max-w-2xl mx-auto text-lg">
+        {subtitle}
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        services.map((service) => (
+          <ServiceCard
+            title={service.title}
+            description={service.description}
+            features={service.features}
+            icon={service.icon}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>

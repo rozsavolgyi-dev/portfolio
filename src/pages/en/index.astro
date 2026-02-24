@@ -1,51 +1,140 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import ProjectCard from "../../components/ProjectCard";
-// We fetch Markdown files using this built-in function
-import { getCollection } from "astro:content";
+import { Code2, Globe, Cpu, Cloud } from "lucide-react";
 
-// Fetch all projects and sort them from newest to oldest
-const allProjects = await getCollection("projects", (entry) =>
-  entry.id.startsWith("en/"),
-);
+import Hero from "../../components/sections/Hero.astro";
+import ValueProposition from "../../components/sections/ValueProposition.astro";
+import ServicesSection from "../../components/sections/ServicesSection.astro";
+import ProcessSection from "../../components/sections/ProcessSection.astro";
+import CtaSection from "../../components/sections/CtaSection.astro";
 
-// We strip the 'en/' prefix from the id (e.g., 'en/first-project') for the link
-const sortedProjects = allProjects.sort(
-  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
-);
+const services = [
+  {
+    title: "Custom Software Development",
+    description:
+      "We design and build tailored software solutions that fit your business — not the other way around. Whether you need a complete platform from scratch or a custom internal tool, we create systems that are:",
+    features: [
+      "Scalable as your business grows",
+      "Secure and reliable",
+      "Easy to use",
+      "Built with modern, industry-standard technologies",
+    ],
+    icon: Code2,
+  },
+  {
+    title: "Web Applications & Platforms",
+    description:
+      "We build fast, modern web applications accessible from anywhere. From customer portals to full SaaS platforms, we deliver solutions that:",
+    features: [
+      "Provide seamless user experiences",
+      "Work smoothly across devices",
+      "Handle real-world traffic and data",
+      "Are built using up-to-date frameworks and best practices",
+    ],
+    icon: Globe,
+  },
+  {
+    title: "System Design & Architecture",
+    description:
+      "Good software starts with good structure. We carefully design every system to ensure:",
+    features: [
+      "Long-term maintainability",
+      "Strong performance",
+      "Data security",
+      "Clean and organized architecture",
+    ],
+    icon: Cpu,
+  },
+  {
+    title: "Deployment & Ongoing Support",
+    description:
+      "We don’t just write code — we deliver working solutions. We handle:",
+    features: [
+      "Secure deployment",
+      "Server setup",
+      "Performance optimization",
+      "Maintenance and future improvements",
+    ],
+    icon: Cloud,
+  },
+];
+
+const processSteps = [
+  {
+    title: "1. Discovery & Planning",
+    description:
+      "We understand your business goals and technical requirements.",
+  },
+  {
+    title: "2. Architecture & Design",
+    description:
+      "We design a scalable and maintainable system before writing code.",
+  },
+  {
+    title: "3. Development",
+    description: "Clean, structured implementation with continuous feedback.",
+  },
+  {
+    title: "4. Testing & Deployment",
+    description: "We ensure stability and performance before going live.",
+  },
+  {
+    title: "5. Long-Term Support",
+    description: "We stay available for improvements and maintenance.",
+  },
+];
+
+const differences = [
+  "Production-level experience (not hobby projects)",
+  "Clean, maintainable, scalable code",
+  "Business-oriented thinking",
+  "Direct communication with engineers (no middle layers)",
+  "Long-term maintainable solutions",
+];
 ---
 
-<Layout title="Home" description="Rosavallis - Professional Web Development">
-  <section class="max-w-6xl mx-auto px-4 py-20 text-center">
-    <h1 class="text-5xl font-extrabold tracking-tight mb-6">
-      Modern websites powered by <span class="text-blue-600">React</span>
-    </h1>
-    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-      Our portfolio is under construction! New projects are coming soon.
-    </p>
-  </section>
+<Layout
+  title="Reliable & Scalable Software"
+  description="Rosavallis - We build high-quality web, mobile and backend solutions for startups, SMEs, and growing businesses."
+>
+  <Hero
+    badgeText="Senior Engineering Agency"
+    subtitle="We are a team of three full-time software engineers delivering high-quality web, mobile and backend solutions for startups, SMEs, and growing businesses."
+    ctaText="Let's Work Together"
+    ctaLink="mailto:hello@rosavallis.com"
+  >
+    <Fragment slot="title">
+      We Build <span class="text-indigo-600">Reliable and Scalable</span> Software
+      That Drives Business Growth.
+    </Fragment>
+  </Hero>
 
-  <section class="max-w-6xl mx-auto px-4 py-12 mb-20">
-    <div class="flex justify-between items-end mb-8">
-      <h2 class="text-3xl font-bold text-gray-900">Latest projects</h2>
-      <a
-        href="/en/projects"
-        class="text-blue-600 font-medium hover:underline hidden sm:block"
-        >View all &rarr;</a
-      >
-    </div>
+  <ValueProposition
+    whoWeAreTitle="Who We Are"
+    whoWeAreText1="We are a team of three experienced software developers working full-time in the tech industry. After years of building production systems, scalable applications, and real-world business solutions, we founded our company to help businesses turn ideas into robust software products."
+    whoWeAreText2="We combine strong engineering principles with practical business understanding — because software should not just work, it should create value."
+    differencesTitle="What Makes Us Different"
+    differences={differences}
+  />
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {
-        sortedProjects.map((project: any) => (
-          <ProjectCard
-            title={project.data.title}
-            description={project.data.description}
-            tags={project.data.tags}
-            href={`/en/projects/${project.id.replace("en/", "")}`}
-          />
-        ))
-      }
-    </div>
-  </section>
+  <ServicesSection
+    title="Our Services"
+    subtitle="We provide end-to-end engineering excellence, from initial architecture to production deployment."
+    services={services}
+  />
+
+  <ProcessSection
+    title="How We Work"
+    description="Our process is designed to ensure transparency, quality, and long-term success for your project. We follow industry best practices at every stage."
+    noMiddleLayersTitle="No middle layers."
+    noMiddleLayersDesc="You communicate directly with the engineers building your software."
+    steps={processSteps}
+  />
+
+  <CtaSection
+    title="Ready to build something robust?"
+    subtitle="Take the first step towards a scalable software solution today. Contact us for a free consultation."
+    ctaText="Let's Work Together"
+    ctaLink="mailto:hello@rosavallis.com"
+  />
 </Layout>
